@@ -57,9 +57,13 @@ NB: in order to verify that EnteLoader worked, you should search for **ProcessAc
 ## Collecting Baseline events
 
 1. Enable an ETW autologger (not mandatory but it is better if you don't want to loose events generated at boot)
-    1.1 create autologger `.\etwdump.exe -autologger SysmonLabTrace "Microsoft-Windows-Sysmon"`
-    1.2 verify the autologger has been created: `reg query HKLM\System\CurrentControlSet\Control\WMI\Autologger\SysmonLabTrace`
-    1.3 reboot the machine to make the autologger starting
+
+   1.1. create autologger `.\etwdump.exe -autologger SysmonLabTrace "Microsoft-Windows-Sysmon"`
+   
+   1.2. verify the autologger has been created: `reg query HKLM\System\CurrentControlSet\Control\WMI\Autologger\SysmonLabTrace`
+   
+   1.3. reboot the machine to make the autologger starting
+   
 2. Reboot the System so that WMI autologger starts logging in the trace you've just created
 3. Collect events from trace `.\etwdump.exe -o sysmon-baseline.json -a "SysmonLabTrace"` for a relevant period of time. You can interact with the system in order to generate some activity
 
