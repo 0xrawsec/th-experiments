@@ -1,2 +1,1 @@
-# th-experiments
-Threat Hunting Experiments
+# Threat Hunting Experiments
