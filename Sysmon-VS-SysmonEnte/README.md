@@ -3,7 +3,7 @@
 System Setup:
 * Windows 11 development VM provided by Microsoft running on VirtualBox
 * Using Sysmon v14.0 and a generic "log-all" configuration
-* Using evtxdump (source available in https://github.com/0xrawsec/golang-etw)
+* Using etwdump (source available in https://github.com/0xrawsec/golang-etw)
 
 ## Lab Preparation
 
