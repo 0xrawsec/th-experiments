@@ -18,7 +18,7 @@ Once we have done that, our environment is ready for testing
 
 1. If you are running your experiments in a VM, make a snapshot so that you can easily revert back in case of mistake
 2. Disable any AV feature. This is a precaution otherwise you might fail at running EntenLoader.exe
-2. Run etwdump to dump the events it collects to a file: `.\etwdump.exe -o .\SysmonEnte-trace.json "Microsoft-Windows-Sysmon"`
+2. Run etwdump (as admin) to dump the events it collects to a file: `.\etwdump.exe -o .\SysmonEnte-trace.json "Microsoft-Windows-Sysmon"`
 3. Run as an Administrator EntenLoader.exe (inside SysmonEnte.zip) -> this is a version I compiled myself, if you want you are free to use your own.
 4. At this point, if EntenLoader.exe worked you should see a success message. If it failed, make sure you are executing it with Administrator privileges.
 4. Wait a bit and hit **Ctrl+C** on etwdump console
@@ -56,13 +56,15 @@ NB: in order to verify that EnteLoader worked, you should search for **ProcessAc
 
 ## Collecting Baseline events
 
-1. Enable an ETW autologger (not mandatory but it is better if you don't want to loose events generated at boot)
+1. Enable an ETW autologger (not mandatory but it is better if you don't want to lose events generated at boot)
 
-   1.1. create autologger `.\etwdump.exe -autologger SysmonLabTrace "Microsoft-Windows-Sysmon"`
+   1.1. open a console as admin
    
-   1.2. verify the autologger has been created: `reg query HKLM\System\CurrentControlSet\Control\WMI\Autologger\SysmonLabTrace`
+   1.2. create autologger `.\etwdump.exe -autologger SysmonLabTrace "Microsoft-Windows-Sysmon"`
    
-   1.3. reboot the machine to make the autologger starting
+   1.3. verify the autologger has been created: `reg query HKLM\System\CurrentControlSet\Control\WMI\Autologger\SysmonLabTrace`
+   
+   1.4. reboot the machine to make the autologger starting
    
 2. Reboot the System so that WMI autologger starts logging in the trace you've just created
 3. Collect events from trace `.\etwdump.exe -o sysmon-baseline.json -a "SysmonLabTrace"` for a relevant period of time. You can interact with the system in order to generate some activity
